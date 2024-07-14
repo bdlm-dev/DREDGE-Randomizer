@@ -20,6 +20,7 @@ public class RandomizerConfig
 
     public static void Initialize()
     {
+        Instance.Seed = Convert.ToInt32(ModConfig.GetProperty<long>("Randomizer", "Seed", SeededRng.Seed)); // integer appears to get read as 64, then fails to be converted to int32
         Instance.UseConfigSeed = ModConfig.GetProperty("Randomizer", "UseConfigSeed", false);
         Instance.RandomizeDifficulty = ModConfig.GetProperty("Randomizer", "RandomizeDifficulty", true);
         Instance.RandomizeHarvestPoIs = ModConfig.GetProperty("Randomizer", "RandomizeHarvestPoIs", true);
@@ -29,6 +30,5 @@ public class RandomizerConfig
         Instance.RandomizeHarvestMinigamesTypes = ModConfig.GetProperty("Randomizer", "RandomizeHarvestMinigamesTypes", true);
         Instance.RandomizeHarvestableType = ModConfig.GetProperty("Randomizer", "RandomizeHarvestableType", false);
         Instance.RandomizeDifficulty = ModConfig.GetProperty("Randomizer", "RandomizeDifficulty", true);
-        Instance.Seed = Convert.ToInt32(ModConfig.GetProperty<long>("Randomizer", "Seed", SeededRng.Seed)); // integer appears to get read as 64, then fails to be converted to int32
     }
 }
