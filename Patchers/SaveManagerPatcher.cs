@@ -1,8 +1,4 @@
 ﻿using HarmonyLib;
-using Randomizer.Helpers;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using UnityEngine;
 using Winch.Core;
 
 namespace Randomizer.Patchers;
@@ -50,7 +46,8 @@ public class SaveManagerPatcher
                     SeededRng.Seed = now.GetHashCode();
                 }
                 WinchCore.Log.Debug("Updated slot " + slot + " creation time to " + now);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 WinchCore.Log.Debug("Error setting slot " + slot + " creation time: " + e);
             }
