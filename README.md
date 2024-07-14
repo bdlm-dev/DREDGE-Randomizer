@@ -31,6 +31,7 @@ Please see the [disclaimer](#disclaimer).
 
 ### Planned
 - Randomize fish required for quests (will need to be careful of the exotic fish)
+- Include crabs in randomization: Crabs can randomize to be fishable from HarvestPOIs, and fish can randomize to be caught via crab pots.
 - Randomize item rewards from quests
 - Randomize HarvestPOI coordinates
 
