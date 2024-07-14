@@ -28,7 +28,7 @@ public class RandomizerConfig
         Instance.RandomizeSizes = ModConfig.GetProperty("Randomizer", "RandomizeSizes", true);
         Instance.RandomizeQuestsRequirements = ModConfig.GetProperty("Randomizer", "RandomizeQuestsRequirements", true);
         Instance.RandomizeHarvestMinigamesTypes = ModConfig.GetProperty("Randomizer", "RandomizeHarvestMinigamesTypes", true);
-        Instance.RandomizeHarvestableType = ModConfig.GetProperty("Randomizer", "RandomizeHarvestableType", false);
+        Instance.RandomizeHarvestableType = ModConfig.GetProperty("Randomizer", "RandomizeHarvestableType", true);
         Instance.RandomizeDifficulty = ModConfig.GetProperty("Randomizer", "RandomizeDifficulty", true);
     }
 }
