@@ -1,4 +1,5 @@
 ﻿using Randomizer.Config;
+using Winch.Core;
 
 namespace Randomizer;
 
@@ -20,15 +21,22 @@ public class RandomizerConfig
 
     public static void Initialize()
     {
-        Instance.Seed = Convert.ToInt32(ModConfig.GetProperty<long>("Randomizer", "Seed", SeededRng.Seed)); // integer appears to get read as 64, then fails to be converted to int32
-        Instance.UseConfigSeed = ModConfig.GetProperty("Randomizer", "UseConfigSeed", false);
-        Instance.RandomizeDifficulty = ModConfig.GetProperty("Randomizer", "RandomizeDifficulty", true);
-        Instance.RandomizeHarvestPoIs = ModConfig.GetProperty("Randomizer", "RandomizeHarvestPoIs", true);
-        Instance.RandomizePoiCoordinates = ModConfig.GetProperty("Randomizer", "RandomizePoiCoordinates", true);
-        Instance.RandomizeSizes = ModConfig.GetProperty("Randomizer", "RandomizeSizes", true);
-        Instance.RandomizeQuestsRequirements = ModConfig.GetProperty("Randomizer", "RandomizeQuestsRequirements", true);
-        Instance.RandomizeHarvestMinigamesTypes = ModConfig.GetProperty("Randomizer", "RandomizeHarvestMinigamesTypes", true);
-        Instance.RandomizeHarvestableType = ModConfig.GetProperty("Randomizer", "RandomizeHarvestableType", true);
-        Instance.RandomizeDifficulty = ModConfig.GetProperty("Randomizer", "RandomizeDifficulty", true);
+        try
+        {
+            Instance.Seed = Convert.ToInt32(ModConfig.GetProperty<long>("Randomizer", "Seed", SeededRng.Seed)); // integer appears to get read as 64, then fails to be converted to int32
+            Instance.UseConfigSeed = ModConfig.GetProperty("Randomizer", "UseConfigSeed", false);
+            Instance.RandomizeDifficulty = ModConfig.GetProperty("Randomizer", "RandomizeDifficulty", true);
+            Instance.RandomizeHarvestPoIs = ModConfig.GetProperty("Randomizer", "RandomizeHarvestPoIs", true);
+            Instance.RandomizePoiCoordinates = ModConfig.GetProperty("Randomizer", "RandomizePoiCoordinates", true);
+            Instance.RandomizeSizes = ModConfig.GetProperty("Randomizer", "RandomizeSizes", true);
+            Instance.RandomizeQuestsRequirements = ModConfig.GetProperty("Randomizer", "RandomizeQuestsRequirements", true);
+            Instance.RandomizeHarvestMinigamesTypes = ModConfig.GetProperty("Randomizer", "RandomizeHarvestMinigamesTypes", true);
+            Instance.RandomizeHarvestableType = ModConfig.GetProperty("Randomizer", "RandomizeHarvestableType", true);
+            Instance.RandomizeDifficulty = ModConfig.GetProperty("Randomizer", "RandomizeDifficulty", true);
+        }
+        catch (Exception e)
+        {
+            WinchCore.Log.Debug("Error reading config: " + e);
+        }
     }
 }
