@@ -2,6 +2,8 @@
 
 public static class SeededRng
 {
+    // Supposedly not good to use .getHashCode() by itself, but don't think it matters for this use-case
+    // https://stackoverflow.com/a/9084760
     public static int Seed = Guid.NewGuid().GetHashCode();
 
     private static Random? _rng;
