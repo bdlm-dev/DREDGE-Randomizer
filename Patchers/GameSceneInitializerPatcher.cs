@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using Randomizer.Config;
 using Randomizer.Helpers;
 using UnityEngine;
 using Winch.Core;

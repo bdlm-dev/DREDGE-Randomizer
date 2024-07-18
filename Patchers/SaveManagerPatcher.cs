@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using Randomizer.Data;
 using Winch.Core;
 
 namespace Randomizer.Patchers;
@@ -15,13 +16,7 @@ public class SaveManagerPatcher
         {
             try
             {
-                string filePath = __instance.saveStrategy.GetFilePath(slot);
-                DateTime fileCreationTime = File.GetCreationTime(filePath);
-                WinchCore.Log.Debug("Slot " + slot + " created at " + fileCreationTime.ToString() + " has hash " + fileCreationTime.GetHashCode().ToString());
-                if (!RandomizerConfig.Instance.UseConfigSeed)
-                {
-                    SeededRng.Seed = fileCreationTime.GetHashCode();
-                }
+                SeededRng.UpdateSeed(ModSaveData.GetSlot(slot).seed);
             }
             catch (Exception e)
             {
@@ -36,21 +31,8 @@ public class SaveManagerPatcher
     {
         public static void Postfix(int slot, SaveManager __instance)
         {
-            try
-            {
-                string filePath = __instance.saveStrategy.GetFilePath(slot);
-                DateTime now = DateTime.Now;
-                File.SetCreationTime(filePath, now);
-                if (!RandomizerConfig.Instance.UseConfigSeed)
-                {
-                    SeededRng.Seed = now.GetHashCode();
-                }
-                WinchCore.Log.Debug("Updated slot " + slot + " creation time to " + now);
-            }
-            catch (Exception e)
-            {
-                WinchCore.Log.Debug("Error setting slot " + slot + " creation time: " + e);
-            }
+            ModSaveData.ResetSlot(slot);
+            SeededRng.UpdateSeed(ModSaveData.GetSlot(slot).seed);
         }
     }
 }

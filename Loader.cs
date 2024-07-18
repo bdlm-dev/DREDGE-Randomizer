@@ -1,4 +1,6 @@
-﻿using Randomizer.Randomizers;
+﻿using Randomizer.Data;
+using Randomizer.Config;
+using Randomizer.Randomizers;
 using Winch.Core;
 using Winch.Core.API;
 using Winch.Core.API.Events.Addressables;
@@ -11,6 +13,7 @@ public static class Loader
     public static void Initialize()
     {
         RandomizerConfig.Initialize();
+        ModSaveData.Initialize();
 
         // use specific seed as set in config
         if (RandomizerConfig.Instance.UseConfigSeed)
@@ -35,7 +38,7 @@ public static class Loader
             }
 
             // reset RNG when visit menu
-            SeededRng.Rng = new Random(SeededRng.Seed);
+            SeededRng.ResetRng();
 
             FishRandomizer.RandomizeAllFish(RandomizerConfig.Instance, allFish);
         }

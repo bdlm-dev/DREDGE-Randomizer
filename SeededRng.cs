@@ -1,4 +1,6 @@
-﻿namespace Randomizer;
+﻿using Randomizer.Config;
+
+namespace Randomizer;
 
 public static class SeededRng
 {
@@ -11,6 +13,17 @@ public static class SeededRng
     {
         get => _rng ?? new(Seed);
         set => _rng = value;
+    }
+
+    public static void ResetRng() => _rng = new(Seed);
+
+    public static void UpdateSeed(int seed)
+    {
+        if (!RandomizerConfig.Instance.UseConfigSeed)
+        {
+            Seed = seed;
+            ResetRng();
+        }
     }
 
     public static List<T> FisherYatesShuffle<T>(List<T> originalList)

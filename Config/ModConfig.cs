@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Winch.Core;
 
 namespace Randomizer.Config
 {
@@ -6,7 +7,7 @@ namespace Randomizer.Config
     {
         private static Dictionary<string, string> DefaultConfigs = new();
         private static Dictionary<string, ModConfig> Instances = new();
-        private const string defaultConfigFile = "Config.json";
+        private const string defaultConfigFile = "config.json";
 
         private ModConfig(string modName, string fileName) : base(GetConfigPath(modName, fileName), GetDefaultConfig(modName))
         {
@@ -35,7 +36,8 @@ namespace Randomizer.Config
 
         private static ModConfig GetConfig(string modName, string fileName, string subDirectory)
         {
-            string _path = Path.Combine(modName, subDirectory);
+            string _path = Path.Combine(modName, subDirectory, fileName);
+            WinchCore.Log.Debug("getconfig " + _path);
             if (!Instances.ContainsKey(_path))
                 Instances.Add(_path, new ModConfig(_path, fileName));
             return Instances[_path];
@@ -54,6 +56,6 @@ namespace Randomizer.Config
         public static Dictionary<string, object?> GetFullConfig(string modName, string fileName = defaultConfigFile, string subDirectory = "")
         {
             return GetConfig(modName, fileName, subDirectory).Config;
-        }
+        }                                                                                                                                            
     }
 }

@@ -1,12 +1,10 @@
-﻿using Randomizer.Config;
-using Winch.Core;
+﻿using Winch.Core;
 
-namespace Randomizer;
+namespace Randomizer.Config;
 
 public class RandomizerConfig
 {
     private static RandomizerConfig? _instance;
-
     public static RandomizerConfig Instance => _instance ??= new();
 
     public bool UseConfigSeed { get; set; } = false;
@@ -20,6 +18,11 @@ public class RandomizerConfig
     public int? Seed { get; set; } = null;
 
     public static void Initialize()
+    {
+        ReadConfig();
+    }
+
+    private static void ReadConfig()
     {
         try
         {
