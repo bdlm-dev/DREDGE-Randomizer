@@ -6,6 +6,10 @@ Massive credit to [InsomniacEeper](https://github.com/insomniac-eeper) for the b
 
 Please see the [disclaimer](#disclaimer).
 
+## Usage
+
+By default, the mod will create save data for each save slot, which is inside `save.json` in the mod folder `/mods/mmbluey.randomizer/`. The seed used for randomization is randomized when you create a new save file, but if you wish to change the seed without resetting progress, the `seed` attribute can be altered in `save.json` for the desired slot (index beginning 0). If you wish to use the same seed across all runs and resets, you can set `UseConfigSeed` to `true` in the config. Specifics of randomization can be set in the config, such as whether fishing size, harvest type, difficulty, and more will be randomized.
+
 ## Config
 * Seed
    * Seed used for RNG: can be used to create repeatable experiences
