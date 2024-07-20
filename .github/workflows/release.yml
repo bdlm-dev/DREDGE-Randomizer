@@ -37,7 +37,7 @@ jobs:
 
             - name: Read mod_meta
               id: read-mod_meta
-              run: echo "mod_meta=$(< ./${{ env.PROJ_NAME }}/mod_meta.json sed ':a;N;$!ba;s/\n/ /g')" >> $GITHUB_OUTPUT
+              run: echo "mod_meta=$(< ./mod_meta.json sed ':a;N;$!ba;s/\n/ /g')" >> $GITHUB_OUTPUT
 
             - name: Check For Release
               id: check-tag
@@ -72,7 +72,7 @@ jobs:
               uses: "actions/upload-artifact@v3"
               with:
                 name: "${{ env.PROJ_USERNAME }}.${{ env.PROJ_NAME }}"
-                path: "${{ env.PROJ_NAME }}/bin/Release"
+                path: "/bin/Release"
     upload:
         needs: [build, pre_job]
         name: Upload Release
