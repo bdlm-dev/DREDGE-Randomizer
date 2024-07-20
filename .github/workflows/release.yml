@@ -70,13 +70,13 @@ jobs:
               uses: "actions/setup-dotnet@v3"
               
             - name: Build Mod
-              run: dotnet build -c Release --output bin/Randomizer
+              run: dotnet build -c Release
               
             - name: Upload Artifact
               uses: "actions/upload-artifact@v3"
               with:
                 name: "${{ env.PROJ_USERNAME }}.${{ env.PROJ_NAME }}"
-                path: "/bin/Randomizer"
+                path: "${{ env.GITHUB_WORKSPACE }}/bin/Randomizer"
                 
     upload:
         needs: [build, pre_job]
