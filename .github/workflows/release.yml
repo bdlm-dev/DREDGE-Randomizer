@@ -52,14 +52,14 @@ jobs:
                 echo "exists=${{steps.check-tag.outputs.exists}}" >> $GITHUB_OUTPUT
                 
             - name: Error
-              if: ${{ steps.out.outputs.exists != 'false' && (!inputs.bypassCheck) }}
+              if: ${{ steps.out.outputs.exists != 'false' && (!inputs.ignoreVersion) }}
               run: |
-                  echo "::error file=mod_meta.json,title=Refusing to Release::Your mod was not released because there is already a release with the version in mod_meta.json, ${{steps.out.outputs.exists}} : ${{inputs.bypassCheck}}"
+                  echo "::error file=mod_meta.json,title=Refusing to Release::Your mod was not released because there is already a release with the version in mod_meta.json"
                   exit 1
     
     build:
         needs: pre_job
-        if: ${{ (needs.pre_job.outputs.version != '0.0.0') && (needs.pre_job.outputs.exists == 'false') || (inputs.bypassCheck) }}
+        if: ${{ (needs.pre_job.outputs.version != '0.0.0') && (needs.pre_job.outputs.exists == 'false') || (inputs.ignoreVersion) }}
         name: Create Release
         runs-on: windows-latest
         steps:
