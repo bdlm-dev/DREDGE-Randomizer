@@ -1,4 +1,8 @@
 # DREDGE Randomizer (W.I.P)
+[![Create Release](https://github.com/bdlm-dev/DREDGE-Randomizer/actions/workflows/release.yml/badge.svg)](https://github.com/bdlm-dev/DREDGE-Randomizer/actions/workflows/release.yml)
+![GitHub License](https://img.shields.io/github/license/bdlm-dev/DREDGE-Randomizer)
+
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/bdlm-dev/DREDGE-Randomizer/total)
 
 Randomizer mod for the game [DREDGE](https://store.steampowered.com/app/1562430/DREDGE/).
 
