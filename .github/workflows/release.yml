@@ -71,6 +71,9 @@ jobs:
               
             - name: Build Mod
               run: dotnet build -c Release
+
+            - name: Echo dir
+              run: dir /s a\DREDGE-Randomizer\DREDGE-Randomizer\
               
             - name: Upload Artifact
               uses: "actions/upload-artifact@v3"
