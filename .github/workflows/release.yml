@@ -72,6 +72,9 @@ jobs:
             - name: Build Mod
               run: dotnet build -c Release --output bin/Randomizer
 
+            - name: Echo directory
+              run: dir /s \
+
             - name: Upload Artifact
               uses: "actions/upload-artifact@v3"
               with:
