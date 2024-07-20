@@ -73,7 +73,7 @@ jobs:
               run: dotnet build -c Release
 
             - name: Echo dir
-              run: dir -s a\DREDGE-Randomizer\DREDGE-Randomizer\
+              run: dir -s
               
             - name: Upload Artifact
               uses: "actions/upload-artifact@v3"
