@@ -38,7 +38,7 @@ public class FishRandomizer
         {
             if (fish.harvestableType != HarvestableType.CRAB)
             {
-                fish.harvestableType = (HarvestableType) HarvestableTypeEnums.GetValue(SeededRng.Rng.Next(HarvestableTypeEnums.Length));
+                fish.harvestableType = (HarvestableType)HarvestableTypeEnums.GetValue(SeededRng.Rng.Next(HarvestableTypeEnums.Length));
             }
         }
     }

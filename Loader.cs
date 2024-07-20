@@ -1,5 +1,5 @@
-﻿using Randomizer.Data;
-using Randomizer.Config;
+﻿using Randomizer.Config;
+using Randomizer.Data;
 using Randomizer.Randomizers;
 using Winch.Core;
 using Winch.Core.API;
