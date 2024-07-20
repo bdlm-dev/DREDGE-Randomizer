@@ -50,9 +50,13 @@ jobs:
               run: | 
                 echo "version=${{fromJson(steps.read-mod_meta.outputs.mod_meta).Version}}" >> $GITHUB_OUTPUT
                 echo "exists=${{steps.check-tag.outputs.exists}}" >> $GITHUB_OUTPUT
+                
             - name: Error
               if: ${{ steps.out.outputs.exists != 'false' && (!inputs.bypassCheck) }}
-              run: echo "::error file=mod_meta.json,title=Refusing to Release::Your mod was not released because there is already a release with the version in mod_meta.json"
+              run: |
+                  echo "::error file=mod_meta.json,title=Refusing to Release::Your mod was not released because there is already a release with the version in mod_meta.json"
+                  exit 1
+    
     build:
         needs: pre_job
         if: ${{ (needs.pre_job.outputs.version != '0.0.0') && (needs.pre_job.outputs.exists == 'false') || (inputs.bypassCheck) }}
@@ -73,6 +77,7 @@ jobs:
               with:
                 name: "${{ env.PROJ_USERNAME }}.${{ env.PROJ_NAME }}"
                 path: "/bin/Release"
+                
     upload:
         needs: [build, pre_job]
         name: Upload Release
@@ -90,6 +95,7 @@ jobs:
                 zip -r ${{ env.PROJ_USERNAME }}.${{ env.PROJ_NAME }}.zip *
                 mv ${{ env.PROJ_USERNAME }}.${{ env.PROJ_NAME }}.zip ..
                 cd ..
+                
             - name: Create Release
               uses: "ncipollo/release-action@v1"
               with:
