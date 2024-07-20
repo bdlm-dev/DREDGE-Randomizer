@@ -68,9 +68,7 @@ jobs:
 
             - name: Setup .NET
               uses: "actions/setup-dotnet@v3"
-              with:
-                dotnet-version: '4.8'  # Change this to your target .NET version
-
+              
             - name: Build Mod
               run: dotnet build -c Release --output bin/Randomizer
 
