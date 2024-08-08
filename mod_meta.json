@@ -4,7 +4,7 @@
     "ModGUID": "mmbluey.randomizer",
     "ModAssembly": "Randomizer.dll",
     "Entrypoint": "Randomizer.Loader/Initialize",
-    "Version": "0.1.0",
+    "Version": "0.1.1",
     "MinWinchVersion": "0.3.2",
     "ApplyPatches": false
 }
