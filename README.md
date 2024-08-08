@@ -1,10 +1,18 @@
 # DREDGE Randomizer (W.I.P)
+[![Create Release](https://github.com/bdlm-dev/DREDGE-Randomizer/actions/workflows/release.yml/badge.svg)](https://github.com/bdlm-dev/DREDGE-Randomizer/actions/workflows/release.yml)
+![GitHub License](https://img.shields.io/github/license/bdlm-dev/DREDGE-Randomizer)
+
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/bdlm-dev/DREDGE-Randomizer/total)
 
 Randomizer mod for the game [DREDGE](https://store.steampowered.com/app/1562430/DREDGE/).
 
 Massive credit to [InsomniacEeper](https://github.com/insomniac-eeper) for the bulk of the work in the initial implementation, initially available [here](https://github.com/SloopyNoSleep/DredgeWinchMods).
 
 Please see the [disclaimer](#disclaimer).
+
+## Usage
+
+By default, the mod will create save data for each save slot, which is inside `save.json` in the mod folder `/mods/mmbluey.randomizer/`. The seed used for randomization is randomized when you create a new save file, but if you wish to change the seed without resetting progress, the `seed` attribute can be altered in `save.json` for the desired slot (index beginning 0). If you wish to use the same seed across all runs and resets, you can set `UseConfigSeed` to `true` in the config. Specifics of randomization can be set in the config, such as whether fishing size, harvest type, difficulty, and more will be randomized.
 
 ## Config
 * Seed
