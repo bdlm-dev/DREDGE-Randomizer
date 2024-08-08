@@ -6,5 +6,5 @@
     "Entrypoint": "Randomizer.Loader/Initialize",
     "Version": "1.1.1",
     "MinWinchVersion": "0.3.2",
-    "ApplyPatches": true
+    "ApplyPatches": false
 }

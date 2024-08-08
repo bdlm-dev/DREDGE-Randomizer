@@ -15,22 +15,45 @@ public class GameSceneInitializerPatcher
     {
         if (RandomizerConfig.Instance.RandomizeHarvestPoIs)
         {
-            try
-            {
-                var harvestPoisContainer = GameObject.Find("HarvestPOIs");
-                if (harvestPoisContainer == null)
-                {
-                    WinchCore.Log.Error("HarvestPOIs not found");
-                    return;
-                }
+            HandlePOIs();
+        }
 
-                var poiList = PoiHelpers.GetPoiListFromContainer(harvestPoisContainer);
-                PoiHelpers.PermuteHarvestPoiLocations(poiList);
-            }
-            catch (Exception ex)
+        if (RandomizerConfig.Instance.RandomizeQuestsRequirements)
+        {
+            HandleQuests();
+        }
+    }
+
+
+    public static void HandlePOIs()
+    {
+        try
+        {
+            var harvestPoisContainer = GameObject.Find("HarvestPOIs");
+            if (harvestPoisContainer == null)
             {
-                WinchCore.Log.Error($"Error in {nameof(GameSceneInitializerPatcher)}: exception {ex}");
+                WinchCore.Log.Error("HarvestPOIs not found");
+                return;
             }
+
+            var poiList = PoiHelpers.GetPoiListFromContainer(harvestPoisContainer);
+            PoiHelpers.PermuteHarvestPoiLocations(poiList);
+        }
+        catch (Exception e)
+        {
+            WinchCore.Log.Error("Error handling POIs in GameSceneInitializerPatcher: " + e);
+        }
+    }
+
+    public static void HandleQuests()
+    {
+        try
+        {
+
+        } 
+        catch(Exception e) 
+        {
+            WinchCore.Log.Error("Error handling Quests in GameSceneInitializerPatcher: " + e);
         }
     }
 }

@@ -18,17 +18,22 @@ public class ModSaveData
 
     public static void Initialize()
     {
+        WinchCore.Log.Debug("hereeeeee");
         try
         {
             // try read from save.json
             // if find data, load it
             // else: generate new base data per slot
 
+            WinchCore.Log.Debug("here?");
             string _rootPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            WinchCore.Log.Debug(_rootPath);
             _savePath = Path.Combine(_rootPath, _saveDataFile);
+            WinchCore.Log.Debug(_savePath);
 
             if (File.Exists(_savePath))
             {
+                WinchCore.Log.Debug("a");
                 string JSON = File.ReadAllText(_savePath);
                 WinchCore.Log.Debug($"Found {JSON} at {_savePath}");
                 try
@@ -44,6 +49,7 @@ public class ModSaveData
             }
             else
             {
+                WinchCore.Log.Debug("b");
                 try
                 {
                     File.WriteAllText(_savePath, JsonConvert.SerializeObject(Instance.data, Formatting.Indented));
@@ -62,6 +68,7 @@ public class ModSaveData
 
     private static SlotData[] CreateNewSaveData()
     {
+        WinchCore.Log.Debug("hello");
         SlotData[] newData = new SlotData[slotCount];
         for (int i = 0; i < slotCount; i++)
         {

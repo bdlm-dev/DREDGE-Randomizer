@@ -1,50 +1,49 @@
-﻿using Randomizer.Config;
+﻿using Dialogue;
+using HarmonyLib;
+using Randomizer.Config;
 using Randomizer.Data;
-using Randomizer.Randomizers;
+using Randomizer.Loaders;
+using UnityEngine;
 using Winch.Core;
 using Winch.Core.API;
-using Winch.Core.API.Events.Addressables;
 
 namespace Randomizer;
 
 public static class Loader
 {
     public static List<ItemData>? originalAllItems = null;
+    public static GameObject gameObject;
     public static void Initialize()
     {
+        new Harmony("mmbluey.randomizer").PatchAll();
+
+        gameObject = new GameObject("Randomizer");
+        gameObject.DontDestroyOnLoad();
+
         RandomizerConfig.Initialize();
         ModSaveData.Initialize();
+        DialogueAPI.Initialize();
 
         // use specific seed as set in config
+        // else is set inside WindowsSaveStrategy.GetData: when save is loaded
         if (RandomizerConfig.Instance.UseConfigSeed)
         {
             SeededRng.Seed = RandomizerConfig.Instance.Seed ?? SeededRng.Seed;
         }
-        // else is set inside WindowsSaveStrategy.GetData: when save is loaded
-        DredgeEvent.AddressableEvents.ItemsLoaded.On += OnPostItemLoad;
-    }
+        
+        // attach event handling to winch events
+        DredgeEvent.AddressableEvents.ItemsLoaded.On += ItemLoader.PostItemLoad;
+        DredgeEvent.AddressableEvents.QuestsLoaded.On += QuestLoader.PostQuestLoad;
 
-    public static void OnPostItemLoad(object sender, AddressablesLoadedEventArgs<ItemData> args)
-    {
-        try
-        {
-            var allItems = (sender as ItemManager)?.allItems;
-            var allFish = allItems?.OfType<FishItemData>().ToList();
-
-            if (allFish == null)
-            {
-                WinchCore.Log.Error($"Error in {nameof(Loader)}: allFish is null");
-                return;
-            }
-
-            // reset RNG when visit menu
-            SeededRng.ResetRng();
-
-            FishRandomizer.RandomizeAllFish(RandomizerConfig.Instance, allFish);
-        }
-        catch (Exception ex)
-        {
-            WinchCore.Log.Error($"Error in ItemManagerPatcher: {ex}");
-        }
+        
     }
 }
+
+/*
+ * what have?
+ *  - yarn DialogueRunner
+ *  - questStepData -> yarnRootNode
+ *  - questStepData -> QuestStepCondition
+ *  - QuestStepCondition : ItemInventoryCondition ?! CompletedGridCondition : ItemCountCondition
+ *  test by checing for ItemInventoryCondition & changing it, see if pursuit details update
+ */

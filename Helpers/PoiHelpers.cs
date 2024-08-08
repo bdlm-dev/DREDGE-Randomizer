@@ -56,7 +56,7 @@ public class PoiHelpers
 
             SwapPoi(poi, permutedPoi, GameManager.Instance.CullingBrain);
 
-            WinchCore.Log.Debug($"Swapping {poi.name} at location [{poi.transform.position.x}, {poi.transform.position.y}, {poi.transform.position.z}] with {permutedPoi.name} at location [{permutedPoi.transform.position.x}, {permutedPoi.transform.position.y}, {permutedPoi.transform.position.z}]");
+            // TODO: re-add this line WinchCore.Log.Debug($"Swapping {poi.name} at location [{poi.transform.position.x}, {poi.transform.position.y}, {poi.transform.position.z}] with {permutedPoi.name} at location [{permutedPoi.transform.position.x}, {permutedPoi.transform.position.y}, {permutedPoi.transform.position.z}]");
 
             poi.SetActive(true);
             permutedPoi.SetActive(true);

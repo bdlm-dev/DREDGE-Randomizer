@@ -6,9 +6,7 @@ namespace Randomizer.Patchers;
 
 public class SaveManagerPatcher
 {
-    // Using save file creation time as persistent factor to generate seed from;
-    // DREDGE doesn't actually ever delete/recreate these files, so setting that time here.
-
+    // Called when a save slot is loaded (not when new save is created)
     [HarmonyPatch(typeof(SaveManager), nameof(SaveManager.Load))]
     public class LoadPatch
     {
@@ -25,7 +23,7 @@ public class SaveManagerPatcher
         }
     }
 
-    // When a save file is 'created', actually update the save file creation time to current time.
+    // Called when a new save is created
     [HarmonyPatch(typeof(SaveManager), nameof(SaveManager.CreateSaveData))]
     public class CreateSaveDataPatch
     {
